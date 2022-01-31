@@ -1,0 +1,5 @@
+# Compiled files
+PDFViewerAssignment/PDFViewerAssignment/bin/
+PDFViewerAssignment/PDFViewerAssignment/obj/
+# Other files
+*.suo
