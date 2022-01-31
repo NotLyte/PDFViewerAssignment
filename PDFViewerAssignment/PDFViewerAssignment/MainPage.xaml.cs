@@ -12,6 +12,24 @@ namespace PDFViewerAssignment
             this.InitializeComponent();
             // Init Demo Mode!
             pdftron.PDFNet.Initialize();
+            // Add resources search path - for fonts when converting MS Office docs
+            pdftron.PDFNet.AddResourceSearchPath("./Resources");
+
+            AddWelcomeTab();
+        }
+
+        // Add Welcome Tab and Page
+        private void AddWelcomeTab()
+        {
+            var newTab = new winui.TabViewItem();
+            newTab.IconSource = new winui.SymbolIconSource() { Symbol = Symbol.Home };
+            newTab.Header = "Welcome";
+
+            Frame frame = new Frame();
+            newTab.Content = frame;
+            frame.Navigate(typeof(WelcomePage));
+
+            MyTabView.TabItems.Add(newTab);
         }
 
         // Add a new Tab to the TabView
@@ -21,12 +39,13 @@ namespace PDFViewerAssignment
             newTab.IconSource = new winui.SymbolIconSource() { Symbol = Symbol.Document };
             newTab.Header = "New Document";
 
-            // The Content of a TabViewItem is often a frame which hosts a page.
             Frame frame = new Frame();
             newTab.Content = frame;
             frame.Navigate(typeof(TabPage));
 
             sender.TabItems.Add(newTab);
+
+            MyTabView.SelectedIndex = MyTabView.TabItems.Count - 1;
         }
 
         // Remove the requested tab from the TabView

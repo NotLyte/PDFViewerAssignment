@@ -1,10 +1,11 @@
 ﻿<Page
-    x:Class="PDFViewerAssignment.View.TabPage"
+    x:Class="PDFViewerAssignment.View.WelcomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:PDFViewerAssignment.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -14,12 +15,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <!--Top Command Bar-->
-        <Border x:Name="CommandBarTop" Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="{ThemeResource AppBarBorderThemeBrush}" BorderThickness="1"/>
-        <CommandBar Grid.ColumnSpan="2" HorizontalAlignment="Left" DefaultLabelPosition="Right">
-            <AppBarButton x:Name="CommandBarOpenFile" Command="{Binding CMDOpenFile}" Label="Open File" Icon="Document"/>
-        </CommandBar>
-        
-        <Border x:Name="PDFViewBorder" Grid.Row="1" Child="{Binding MyPDFViewCtrl}"/>
+        <Border x:Name="PDFViewBorder" Grid.Row="1"/>
     </Grid>
 </Page>

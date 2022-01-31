@@ -15,8 +15,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--Tab Bar-->
-        <winui:TabView x:Name="TabBar" AddTabButtonClick="TabView_AddTabButtonClick"
+        <!--Tab View-->
+        <winui:TabView x:Name="MyTabView" AddTabButtonClick="TabView_AddTabButtonClick"
                TabCloseRequested="TabView_TabCloseRequested" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
 
             <winui:TabView.TabStripHeader>

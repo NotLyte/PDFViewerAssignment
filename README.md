@@ -19,7 +19,7 @@ This is a work assignment to build a multi-tab PDF Viewer windows application us
 ## Known issues
 
 - Conversion does not always work if the file contains fonts that are not supported, or maybe I missed something.
-- Files seems to be "locked" for a period of time after openning them, perhaps improvements can be made here.
+- Files seems to be "locked" for a period of time after opening them, perhaps improvements can be made here.
 
 ## Resources
 

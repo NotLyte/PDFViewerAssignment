@@ -20,13 +20,114 @@ using pdftron.PDF.Tools;
 using pdftron.PDF.Tools.Controls;
 using pdftron.Filters;
 
-
 namespace PDFViewerAssignment.ViewModel
 {
+    // IConvertible for string file extensions, specifically for PDFs
+    class DocumentType : IConvertible
+    {
+        string documentType;
+
+        public DocumentType(string documentType)
+        {
+            this.documentType = documentType;
+        }
+
+        public TypeCode GetTypeCode()
+        {
+            return TypeCode.Object;
+        }
+
+        public bool ToBoolean(IFormatProvider provider)
+        {
+            if (documentType == ".pdf" || documentType == ".fdf" || documentType == ".xfdf")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public byte ToByte(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public char ToChar(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public DateTime ToDateTime(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public decimal ToDecimal(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public double ToDouble(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public short ToInt16(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public int ToInt32(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public long ToInt64(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public sbyte ToSByte(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public float ToSingle(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public string ToString(IFormatProvider provider)
+        {
+            return documentType;
+        }
+
+        public object ToType(Type conversionType, IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public ushort ToUInt16(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public uint ToUInt32(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+
+        public ulong ToUInt64(IFormatProvider provider)
+        {
+            throw new InvalidCastException();
+        }
+    }
+
     class TabPageViewModel : BaseViewModel
     {
-        ToolManager _toolManagerPDF;
-
+        #region Initializations
         public ICommand CMDOpenFile { get; set; }
 
         private PDFViewCtrl _pDFViewCtrl = new pdftron.PDF.PDFViewCtrl();
@@ -40,11 +141,13 @@ namespace PDFViewerAssignment.ViewModel
         {
             // Init Commands
             CMDOpenFile = new RelayCommand(OpenFile);
-
-            // ToolManager is initialized with the PDFViewCtrl and it activates all available tools
-            _toolManagerPDF = new ToolManager(MyPDFViewCtrl);
         }
+        #endregion
 
+        #region OpenFile and Convert
+        /// <summary>
+        /// Opens file picker and filters for pdfs and ms docs
+        /// </summary>
         async private void OpenFile()
         {
             FileOpenPicker filePicker = new FileOpenPicker();
@@ -80,13 +183,16 @@ namespace PDFViewerAssignment.ViewModel
 
         private bool IsPDFDoc(string fileType)
         {
-            if (fileType == ".pdf" || fileType == ".fdf" || fileType == ".xfdf")
-            {
-                return true;
-            }
-            return false;
+            DocumentType docType = new DocumentType(fileType);
+            return System.Convert.ToBoolean(docType);
         }
 
+        /// <summary>
+        /// Attempts to open PDFs or MS Docs, if it is a MS Doc then convert it to pdf, then display pdf
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
         private async Task OpenFilePDFViewer(IStorageFile file, FileAccessMode mode)
         {
             if (file == null)
@@ -145,5 +251,6 @@ namespace PDFViewerAssignment.ViewModel
                 }
             }
         }
+        #endregion
     }
 }
